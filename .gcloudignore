@@ -1,0 +1,27 @@
+# This file specifies files that are *not* uploaded to Google Cloud
+# using gcloud. If you would like to upload your files to Google Cloud
+# based on the contents of this file, you can override the default skip-file.
+
+# If you want to override the default list of files skipped by gcloud,
+# create a .gcloudignore file in the root directory of your cloud-hosted app,
+# and gcloud will skip files listed there.
+
+node_modules/
+.git
+.gitignore
+README.md
+.env
+.env.local
+.env.*.local
+docker-compose.yml
+.dockerignore
+Dockerfile
+*.log
+.DS_Store
+.vscode
+.idea
+dist/
+build/
+coverage/
+.nyc_output/
+.git/

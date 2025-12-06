@@ -1,0 +1,17 @@
+runtime: nodejs20
+
+env: flex
+entrypoint: cd server && npm start
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 3
+
+env_variables:
+  DB_HOST: "cloudsql-connection-name"
+  DB_USER: "postgres"
+  DB_NAME: "pern-todo"
+  # DB_PASSWORD diambil dari Secret Manager
+
+beta_settings:
+  cloud_sql_instances: "project:region:instance-name"

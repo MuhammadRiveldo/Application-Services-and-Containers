@@ -1,20 +1,26 @@
-# Use an official Node.js runtime as a parent image
-FROM node:14
+# Build stage
+FROM node:20-alpine AS builder
 
-# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-# Install any needed packages
 RUN npm install
 
-# Bundle app source
 COPY . .
 
-# Make port 3000 available to the world outside this container
+RUN npm run build
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+# Install serve to run the production build
+RUN npm install -g serve
+
+COPY --from=builder /usr/src/app/build ./build
+
 EXPOSE 3000
 
-# Define the command to run your app
-CMD [ "npm", "start" ]
+CMD [ "serve", "-s", "build", "-l", "3000" ]
